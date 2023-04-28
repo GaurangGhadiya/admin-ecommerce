@@ -7,6 +7,7 @@ import {useFormik} from 'formik'
 import {getUserByToken, login} from '../core/_requests'
 import {toAbsoluteUrl} from '../../../../_metronic/helpers'
 import {useAuth} from '../core/Auth'
+import axios from 'axios'
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -41,6 +42,15 @@ export function Login() {
     onSubmit: async (values, {setStatus, setSubmitting}) => {
       setLoading(true)
       try {
+        const body = {
+          email : values?.email,
+          password : values.password
+      }
+        axios.post("http://ddd-env.eba-x4nn27nm.ap-south-1.elasticbeanstalk.com/user/signin", body).then(res => {
+          alert("Success")
+        }).catch(err => {
+          alert("Error")
+        })
         const {data: auth} = await login(values.email, values.password)
         saveAuth(auth)
         const {data: user} = await getUserByToken(auth.api_token)
