@@ -46,7 +46,7 @@ export function Login() {
           email : values?.email,
           password : values.password
       }
-        axios.post("https://webapi.unicornui.com/user/login", body).then(res => {
+        axios.post("http://ddd-env.eba-x4nn27nm.ap-south-1.elasticbeanstalk.com/user/signin", body).then(res => {
           alert("Success")
         }).catch(err => {
           alert("Error")
